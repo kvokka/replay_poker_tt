@@ -3,7 +3,7 @@ class LeaderboardEntriesController < ApplicationController
 
   # GET /leaderboard_entries
   def index
-    @leaderboard_entries = LeaderboardEntry.all
+    @leaderboard_entries = LeaderboardEntry.includes(:leaderboard)
   end
 
   # GET /leaderboard_entries/1
@@ -24,7 +24,7 @@ class LeaderboardEntriesController < ApplicationController
     @leaderboard_entry = LeaderboardEntry.new(leaderboard_entry_params)
 
     if @leaderboard_entry.save
-      redirect_to @leaderboard_entry, notice: 'Leaderboard entry was successfully created.'
+      redirect_to @leaderboard_entry.leaderboard, notice: 'Score added.'
     else
       render :new
     end

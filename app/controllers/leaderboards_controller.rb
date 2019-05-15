@@ -8,6 +8,7 @@ class LeaderboardsController < ApplicationController
 
   # GET /leaderboards/1
   def show
+    @ranks = LeaderboardEntry.ranked @leaderboard
   end
 
   # GET /leaderboards/new
@@ -43,18 +44,6 @@ class LeaderboardsController < ApplicationController
   def destroy
     @leaderboard.destroy
     redirect_to leaderboards_url, notice: 'Leaderboard was successfully destroyed.'
-  end
-
-  def add_score
-    username, score = params[:username]
-    score = params[:score]
-    if @leaderboard.entries.where(username: username).exists?
-      entry = @leaderboard.entries.where(username: username).first
-      entry.update(score: score.to_i + entry.score)
-    else
-      @leaderboard.entries.create(username: username, score: score)
-    end
-    redirect_to @leaderboard, notice: 'Score added'
   end
 
   private
