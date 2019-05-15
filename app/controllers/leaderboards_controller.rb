@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class LeaderboardsController < ApplicationController
-  before_action :set_leaderboard, only: [:show, :edit, :update, :destroy, :add_score]
+  before_action :set_leaderboard, only: %i[show edit update destroy]
 
   # GET /leaderboards
   def index
@@ -17,15 +19,14 @@ class LeaderboardsController < ApplicationController
   end
 
   # GET /leaderboards/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /leaderboards
   def create
     @leaderboard = Leaderboard.new(leaderboard_params)
 
     if @leaderboard.save
-      redirect_to @leaderboard, notice: 'Leaderboard was successfully created.'
+      redirect_to @leaderboard, notice: "Leaderboard was successfully created."
     else
       render :new
     end
@@ -34,7 +35,7 @@ class LeaderboardsController < ApplicationController
   # PATCH/PUT /leaderboards/1
   def update
     if @leaderboard.update(leaderboard_params)
-      redirect_to @leaderboard, notice: 'Leaderboard was successfully updated.'
+      redirect_to @leaderboard, notice: "Leaderboard was successfully updated."
     else
       render :edit
     end
@@ -43,7 +44,7 @@ class LeaderboardsController < ApplicationController
   # DELETE /leaderboards/1
   def destroy
     @leaderboard.destroy
-    redirect_to leaderboards_url, notice: 'Leaderboard was successfully destroyed.'
+    redirect_to leaderboards_url, notice: "Leaderboard was successfully destroyed."
   end
 
   private
