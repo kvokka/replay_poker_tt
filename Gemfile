@@ -21,6 +21,7 @@ gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
   gem "awesome_print", require: "ap"
+  gem "factory_bot_rails"
   gem "pp_sql"
   gem "pry-rails"
   gem "pry-rescue"
