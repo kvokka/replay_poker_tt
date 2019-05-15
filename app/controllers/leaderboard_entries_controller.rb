@@ -22,12 +22,10 @@ class LeaderboardEntriesController < ApplicationController
   # POST /leaderboard_entries
   def create
     @leaderboard_entry = LeaderboardEntry.new(leaderboard_entry_params)
-
-    if @leaderboard_entry.save
-      redirect_to @leaderboard_entry.leaderboard, notice: 'Score added.'
-    else
-      render :new
-    end
+    rank_delta = @leaderboard_entry.save_with_rank
+    return render(:new) unless rank_delta
+    message = "Score added. #{leaderboard_entry_params[:username]} rank changed by #{rank_delta}"
+    redirect_to @leaderboard_entry.leaderboard, notice: message
   end
 
   # PATCH/PUT /leaderboard_entries/1

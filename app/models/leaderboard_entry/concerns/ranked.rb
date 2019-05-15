@@ -15,6 +15,13 @@ module LeaderboardEntry::Concerns
       end
     end
 
+    def save_with_rank(*args)
+      rank_before = self.class.ranked leaderboard
+      return false unless save(*args)
+      rank_after = self.class.ranked leaderboard
+      (rank_before.keys.index(username) || rank_after.size) - rank_after.keys.index(username)
+    end
+
     private
 
     def drop_leaderboard_cache
