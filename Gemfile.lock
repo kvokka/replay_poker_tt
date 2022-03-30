@@ -104,7 +104,8 @@ GEM
       pry (>= 0.9.11)
     pry-state (0.1.10)
       pry (>= 0.9.10, < 0.12.0)
-    puma (3.11.3)
+    puma (4.3.12)
+      nio4r (~> 2.0)
     rack (2.0.4)
     rack-test (0.8.3)
       rack (>= 1.0, < 3)
@@ -213,7 +214,7 @@ DEPENDENCIES
   pry-rescue
   pry-stack_explorer
   pry-state
-  puma (~> 3.7)
+  puma (~> 4.3)
   rails (~> 5.1.4)
   rspec-rails
   rubocop (~> 0.69)
